@@ -4,7 +4,8 @@ const fs = require('fs')
 const os = require('os')
 const notes = require('./notes')
 
-
+const add = notes.add(3, 7)
+console.log(add)
 
 // let user = os.userInfo()
 
