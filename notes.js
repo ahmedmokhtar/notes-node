@@ -9,7 +9,7 @@ const getAll = () => {
 }
 
 const getNote = (title) => {
-    console.log('Note', title)
+    console.log('Getting note', title)
 }
 
 const removeNote = (title) => {
