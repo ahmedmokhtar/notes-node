@@ -14,12 +14,22 @@ console.log('Yargs: ', argv)
 
 if (command === 'add') {
     const note = notes.addNote(argv.title, argv.body) 
-    const message = note ? `Note with title: "${note.title}" wass successfully added.` : "Note was not added. A note with the same title exists."
-    console.log(message)
+    if (note) {
+        console.log('Note created')
+        notes.logNote(note)
+    } else {
+        console.log('Note title taken')
+    }
 } else if (command === 'list') {
     notes.getAll()
 } else if (command === 'read') {
-    notes.getNote(argv.title)
+    const note = notes.getNote(argv.title)
+    if (note) {
+        console.log('Note was found')
+        notes.logNote(note)
+    } else {
+        console.log('Note was not found')
+    }
 } else if (command === 'remove') {
     const noteRemoved = notes.removeNote(argv.title)
     const message = noteRemoved ? "Note was removed" : "Note not found"
