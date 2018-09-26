@@ -1,15 +1,39 @@
-const fs = require('fs')
 const _ = require('lodash')
 const yargs = require('yargs')
 
 const notes = require('./notes.js')
+const argvOptions = {
+    title: {
+        describe: 'Title of note',
+        demand: true,
+        alias:'t'
+    },
+    body: {
+        describe: 'Add the note body',
+        demand: true,
+        alias: 'b'
+    }
+}
 
-const argv = yargs.argv
+const argv = yargs
+    .command('add', 'Add a new note', {
+        title: argvOptions.title,
+        body: argvOptions.body
+    })
+    .command('list', 'List all notes')
+    .command('read', 'Read a note', {
+        title: argvOptions.title
+    })
+    .command('remove', 'Remove a note', {
+        title: argvOptions.title
+    })
+    .help()
+    .argv
 
 const command = process.argv[2]
 
 if (command === 'add') {
-    const note = notes.addNote(argv.title, argv.body) 
+    const note = notes.addNote(argv.title, argv.body)
     if (note) {
         console.log('Note created')
         notes.logNote(note)
